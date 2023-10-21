@@ -1,0 +1,21 @@
+<h2 class="chart-title">Medals per Country</h2>
+<div class="info-boxes">
+  <div class="info-box">
+    <span>Number of JOs: {{ getTotalJOs() }}</span>
+  </div>
+  <div class="info-box">
+    <span>Number of Countries: {{ data.length }}</span>
+  </div>
+</div>
+<ngx-charts-pie-chart
+[results]="pieChartData"
+[view]="view"
+[gradient]="gradient"
+[legend]="showLegend"
+[legendPosition]="legendPosition"
+[labels]="showLabels"
+[doughnut]="isDoughnut"
+(select)="onCountrySelect($event)"
+>
+</ngx-charts-pie-chart>
+<!--  -->
