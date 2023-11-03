@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OlympicService } from '../../core/services/olympic.service';
 import { Olympic } from '../../core/models/Olympic';
-import { LegendPosition } from '@swimlane/ngx-charts'; 
+import { LineChartData, DataPoint } from 'src/app/core/models/LineCharts';
 
 
 @Component({
@@ -11,28 +11,47 @@ import { LegendPosition } from '@swimlane/ngx-charts';
   styleUrls: ['./country-detail.component.scss']
 })
 export class CountryDetailComponent implements OnInit {
-  countryName!: string | null;
-  lineChartData: any[] = [];
-  
-  // options
-  view: [number, number] = [700, 370]; 
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  legendPosition: LegendPosition = LegendPosition.Below;
-  autoScale: boolean = true;
+  countryName: string = '';
+  lineChartData!: LineChartData[];
 
   constructor(private route: ActivatedRoute, 
               private router: Router, 
-              private olympicService: OlympicService) { }
+              private olympicService: OlympicService
+  ) {}
 
   ngOnInit(): void {
-    this.countryName = this.route.snapshot.paramMap.get('country');
-    this.loadCountryDetails();
+    this.route.paramMap.subscribe(params => {
+      this.countryName = params.get('country') || '';
+      this.fetchCountryData();
+    });
   }
 
-  loadCountryDetails() {
-
+  // Fetch country-specific data
+  private fetchCountryData() {
+    console.log("country name", this.countryName)
+    this.olympicService.getOlympic(this.countryName).subscribe(data => {
+      if (data) {
+        this.lineChartData = this.convertToLineChartData(data)
+      } else {
+        // this.router.navigate(['/not-found']);
+        console.log("blabla")
+      }
+    });
   }
+
+  private convertToLineChartData(countryData: Olympic): LineChartData[] {
+    const lineChartData: LineChartData[] = [{
+      name: countryData.country,
+      series: countryData.participations.map(participation => {
+        return {
+          name: participation.year.toString(),
+          value: participation.medalsCount
+        } as DataPoint;
+      })
+    }];
+    return lineChartData;
+  }
+
 
   goBack() {
     this.router.navigate(['/']);

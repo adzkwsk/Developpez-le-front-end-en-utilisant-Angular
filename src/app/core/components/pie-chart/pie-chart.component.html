@@ -1,7 +1,7 @@
 <h2 class="chart-title">Medals per Country</h2>
 <div class="info-boxes">
   <div class="info-box">
-    <span>Number of JOs: {{ getTotalJOs() }}</span>
+    <span>Number of JOs: {{ getJOforCountry() }}</span>
   </div>
   <div class="info-box">
     <span>Number of Countries: {{ data.length }}</span>
@@ -18,4 +18,3 @@
 (select)="onCountrySelect($event)"
 >
 </ngx-charts-pie-chart>
-<!--  -->

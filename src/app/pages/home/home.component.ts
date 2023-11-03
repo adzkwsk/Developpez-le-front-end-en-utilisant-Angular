@@ -17,9 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    console.log(this.pieData)
     this.subscription = this.olympicService.getOlympics().subscribe((data) => {
-      console.log(data)
       if (data) {
         this.olympicData = data;
         this.pieData = this.olympicData.map( olympic => {

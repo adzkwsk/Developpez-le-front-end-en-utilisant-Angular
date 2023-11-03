@@ -8,6 +8,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PieChartComponent } from './core/components/pie-chart/pie-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CountryDetailComponent } from './pages/country-detail/country-detail.component';
+import { LineChartComponent } from './core/components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CountryDetailComponent } from './pages/country-detail/country-detail.co
     HomeComponent, 
     NotFoundComponent, 
     PieChartComponent, 
-    CountryDetailComponent
+    CountryDetailComponent, 
+    LineChartComponent
   ],
   imports: [
     BrowserModule, 

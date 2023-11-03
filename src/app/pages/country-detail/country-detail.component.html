@@ -1,13 +1,6 @@
 <h2 class="chart-title">Detail for {{ countryName }}</h2>
 
-<ngx-charts-line-chart 
-  [results]="lineChartData"
-  [view]="view"
-  [gradient]="gradient"
-  [legend]="showLegend"
-  [legendPosition]="legendPosition"
-  [autoScale]="autoScale">
-</ngx-charts-line-chart>
+<app-line-chart [data]="lineChartData" *ngIf="lineChartData"></app-line-chart>
 
 <button (click)="goBack()">Back</button>
 

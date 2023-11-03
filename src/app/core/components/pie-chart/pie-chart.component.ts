@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class PieChartComponent implements OnInit, OnChanges {
   @Input() data: PieChartData[] = [];
-  pieChartData: any[] = [];
+  pieChartData: PieChartData[] = [];
 
   //options
   view: [number, number] = [700, 370]; // width & height
@@ -32,10 +32,10 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.pieChartData = this.data;
   }
 
-  getTotalJOs(): number {
+  getJOforCountry(): number {
     let total = 0;
-    this.data.forEach(country => {
-      total += country.value; // assuming value is the number of JOs
+    this.data.forEach(data => {
+      total += data.value; 
     });
     return total;
   }
