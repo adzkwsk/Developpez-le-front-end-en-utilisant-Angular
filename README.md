@@ -18,6 +18,7 @@ I realized that I haven't been following a structured commit message format in t
 
 ### What are Conventional Commits?
 Conventional Commits are a specification for adding human and machine-readable meaning to commit messages. This convention dovetails with SemVer, by describing the features, fixes, and breaking changes made in commit messages.
+https://www.conventionalcommits.org/en/v1.0.0/
 
 ### Commit Message Format
 A typical commit message using the conventional commits standard looks like this:
