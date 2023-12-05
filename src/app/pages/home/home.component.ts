@@ -3,6 +3,7 @@ import { take, Subscription } from 'rxjs';
 import { OlympicService } from '../../core/services/olympic.service';
 import { Olympic } from '../../core/models/Olympic';
 import { PieChartData } from '../../core/models/PieCharts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,19 +15,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   olympicData: Olympic[] = [];
   pieData: PieChartData[] = [];
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(
+    private olympicService: OlympicService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.subscription = this.olympicService.getOlympics().subscribe((data) => {
       if (data) {
         this.olympicData = data;
-        this.pieData = this.olympicData.map( olympic => {
+        this.pieData = this.olympicData.map(olympic => {
           return {
             name: olympic.country,
             value: olympic.participations.reduce((total, participation) => total + participation.medalsCount, 0)
           };
         });
-        console.log(this.pieData)
       }
     });
   }
@@ -35,5 +37,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  getJOforCountry(): number {
+    let total = 0;
+    this.pieData.forEach(data => {
+      total += data.value; 
+    });
+    return total;
+  }
+
+  onCountrySelect(event: string) {
+      this.router.navigate(['/country-detail', event]);
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OlympicService } from '../../core/services/olympic.service';
 import { Olympic } from '../../core/models/Olympic';
 import { LineChartData, DataPoint } from 'src/app/core/models/LineCharts';
+import { Participation } from 'src/app/core/models/Participation';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { LineChartData, DataPoint } from 'src/app/core/models/LineCharts';
 })
 export class CountryDetailComponent implements OnInit {
   countryName: string = '';
+  olympicData!: Olympic;
   lineChartData!: LineChartData[];
 
   constructor(private route: ActivatedRoute, 
@@ -26,17 +28,34 @@ export class CountryDetailComponent implements OnInit {
     });
   }
 
+  getTotalEntries(): Number {
+    return this.olympicData.participations.length
+  }
+
+  getTotalMedals(): Number {
+    return this.olympicData.participations.reduce(
+      (previousValue: any, currentValue: any) => 
+        previousValue + currentValue.medalsCount
+      , 0
+    )
+  }
+
+  getTotalAthletes(): Number {
+    return this.olympicData.participations.reduce(
+      (previousValue: any, currentValue: any) => 
+        previousValue + currentValue.athleteCount
+      , 0
+    )
+  }
+
   // Fetch country-specific data
   private fetchCountryData() {
-    console.log("country name", this.countryName)
     this.olympicService.getOlympic(this.countryName).subscribe(data => {
       if (data) {
+        this.olympicData = data
         this.lineChartData = this.convertToLineChartData(data)
-      } else {
-        // this.router.navigate(['/not-found']);
-        console.log("blabla")
       }
-    });
+    }, error => this.router.navigate(['/not-found']));
   }
 
   private convertToLineChartData(countryData: Olympic): LineChartData[] {

@@ -17,8 +17,8 @@ export class AppComponent implements OnInit{
     this.olympicSub = this.olympicService.loadInitialData().pipe(take(1)).subscribe()
   }
 
-  // ngOnDestroy(): void {
-  //     this.olympicSub.unsubscribe()
-  // }
+  ngOnDestroy(): void {
+      this.olympicSub.unsubscribe()
+  }
 
 }

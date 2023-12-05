@@ -1,6 +1,17 @@
-<p>Home</p>
-
- <app-pie-chart [data]="pieData"></app-pie-chart>
+<h2 class="chart-title">Medals per country</h2>
+<div class="container">
+    <div class="info-boxes">
+        <div class="info-box">
+            <div class="info-text">Number of JOs:</div>
+            <div class="info-number">{{ getJOforCountry() }}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-text">Number of Countries:</div>
+            <div class="info-number">{{ pieData.length }}</div>
+        </div>
+      </div>
+    <app-pie-chart [data]="pieData" (selectedCountry)="onCountrySelect($event)"></app-pie-chart>
+</div>
 
  
 

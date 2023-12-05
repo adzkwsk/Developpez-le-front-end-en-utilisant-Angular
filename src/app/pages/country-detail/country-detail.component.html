@@ -1,6 +1,24 @@
-<h2 class="chart-title">Detail for {{ countryName }}</h2>
+<h2 class="chart-title">{{ countryName }}</h2>
 
-<app-line-chart [data]="lineChartData" *ngIf="lineChartData"></app-line-chart>
+<div class="container">
+    <div class="info-boxes">
+        <div class="info-box">
+            <div class="info-text">Number of entries</div>
+            <div class="info-number">{{getTotalEntries()}}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-text">Total number medals</div>
+            <div class="info-number">{{getTotalMedals()}}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-text">Total number of athletes</div>
+            <div class="info-number">{{getTotalAthletes()}}</div>
+        </div>
+    </div>
+    <app-line-chart [data]="lineChartData" *ngIf="lineChartData"></app-line-chart>
+</div>
+
 
 <button (click)="goBack()">Back</button>
+<!-- <a routerLink="/">Back</a> -->
 
