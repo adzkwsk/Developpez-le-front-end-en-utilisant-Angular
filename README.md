@@ -12,18 +12,42 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Where to start
+## Conventional Commits Guide
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+I realized that I haven't been following a structured commit message format in this project. I know it's important for maintaining a codebase, so here's a guide to the conventional commit style that I usually adhere to. This method helps in understanding the history of changes and makes automated tools more effective.
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+### What are Conventional Commits?
+Conventional Commits are a specification for adding human and machine-readable meaning to commit messages. This convention dovetails with SemVer, by describing the features, fixes, and breaking changes made in commit messages.
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+### Commit Message Format
+A typical commit message using the conventional commits standard looks like this:
+```<type>(<scope>): <description>```
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+Type: Indicates the purpose of the commit.
+Scope: Refers to the part of the codebase affected by the change (optional).
+Description: A brief description of the change.
 
-You're now ready to implement the requested features.
+### Common Types of Commits
+**feat**: A new feature for the user.
+feat(authentication): add two-factor authentication
 
-Good luck!
+**fix**: A bug fix for the user.
+fix(login): resolve incorrect password error
+
+**docs**: Changes in the documentation.
+docs(readme): update installation instructions
+
+**style**: Changes that do not affect the meaning of the code (formatting).
+style(header): align title correctly
+
+**refactor**: A code change that neither fixes a bug nor adds a feature.
+refactor(user-service): streamline user data processing
+
+**perf**: A code change that improves performance.
+perf(cache): optimize image caching logic
+
+**test**: Adding or correcting tests.
+test(api): increase coverage for user endpoint
+
+**chore**: Changes to the build process or auxiliary tools.
+chore(release): update version to 1.0.1
