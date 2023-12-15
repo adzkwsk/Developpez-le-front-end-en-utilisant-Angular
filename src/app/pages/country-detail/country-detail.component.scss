@@ -1,59 +1,99 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .chart-title {
     margin: 0 auto;
+    padding: 0.5rem;
     font-family: 'Arial', sans-serif;
-    width: 33.33%;
-    font-size: 2.5rem;   
-    font-weight: normal; 
+    font-size: 2.5rem;
+    font-weight: normal;
     text-align: center;
-    margin-bottom: 2rem;
-    color: white;        
-    background-color: teal; 
-    padding: 0.5rem;    
+    color: white;
+    background-color: teal;
     border-radius: 8px;
+    width: 33.33%;
+    max-width: 100%;
+    margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+        width: 50%;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 1.5rem;
+        width: 100%;
+    }
 }
 
 .container {
-    display: flex;          // Flexbox pour centrer le contenu
-    flex-direction: column; // Elements du haut vers le bas
-    justify-content: center; // Centrer le contenu horizontalement
-    align-items: center;     // Centrer le contenu verticalement
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
 
-    .info-boxes {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 1rem;
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
 
-        .info-box {
-            font-family: 'Arial', sans-serif;
-            flex: 1; 
-            padding: 1rem;
-            text-align: center; 
-            border: 3px solid teal;
-            border-radius: 8px; 
-            background-color: #f5f5f5; 
+.info-box {
+    font-family: 'Arial', sans-serif;
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    border: 3px solid teal;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    max-width: 100%;
 
-            &:not(:last-child) {
-                margin-right: 1rem; // Espacement entre les boxes, sauf pour la derniere
-            }
-        }
-        
-        .info-text {
-            font-size: 1rem; 
-            margin-bottom: 0.5rem; 
-        }
-        
-        .info-number {
-            font-size: 1.5rem; 
-            font-weight: bold; 
-        }
+    &:not(:last-child) {
+        margin-right: 1rem;
     }
 }
+
+@media (max-width: 768px) {
+    .info-boxes {
+        flex-direction: column;
+    }
+
+    .info-box:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+.info-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 
 button {
     margin: 0 auto;
@@ -70,6 +110,9 @@ button {
     &:hover {
         background-color: #0056b3;
     }
-}
 
-  
+    @media (max-width: 768px) {
+        padding: 0.5rem 1rem;
+    }
+}
+ 

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LineChartData } from '../../models/LineCharts';
-import { Olympic } from '../../models/Olympic';
 
 @Component({
   selector: 'app-line-chart',
@@ -12,7 +11,7 @@ export class LineChartComponent implements OnInit {
   lineChartData!: LineChartData[];
 
   // Options 
-  view: [number, number] = [700, 400];
+  view: [number, number] = [700, 370];
   legend: boolean = false;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -20,14 +19,13 @@ export class LineChartComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  timeline: boolean = true; 
-
-  constructor() {}
+  timeline: boolean = true;
 
   ngOnInit(): void {
     if (this.data) {
       this.lineChartData = this.data
     }
   }
+
 
 }

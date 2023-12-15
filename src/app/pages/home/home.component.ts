@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { take, Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { OlympicService } from '../../core/services/olympic.service';
 import { Olympic } from '../../core/models/Olympic';
 import { PieChartData } from '../../core/models/PieCharts';
 import { Router } from '@angular/router';
+import { Constants } from 'src/app/core/constants';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private subscription!: Subscription;
+  private destroy$ = new Subject<void>();
   olympicData: Olympic[] = [];
   pieData: PieChartData[] = [];
 
@@ -20,34 +21,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     private router: Router) {}
 
   ngOnInit(): void {
-    this.subscription = this.olympicService.getOlympics().subscribe((data) => {
-      if (data) {
-        this.olympicData = data;
-        this.pieData = this.olympicData.map(olympic => {
-          return {
-            name: olympic.country,
-            value: olympic.participations.reduce((total, participation) => total + participation.medalsCount, 0)
-          };
-        });
-      }
-    });
+    this.olympicService.getOlympics()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.olympicData = data ?? [];
+        this.pieData = this.olympicData.map(olympic => ({
+          name: olympic.country,
+          value: olympic.participations.reduce((total, participation) => total + participation.medalsCount, 0)
+        }));
+      });
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   getJOforCountry(): number {
-    let total = 0;
-    this.pieData.forEach(data => {
-      total += data.value; 
-    });
-    return total;
+    return this.pieData.reduce((total, data) => total + data.value, 0);
   }
 
   onCountrySelect(event: string) {
-      this.router.navigate(['/country-detail', event]);
+      this.router.navigate([Constants.COUNTRY_DETAIL_URL, event]);
   }
 }

@@ -7,11 +7,11 @@ import { CountryDetailComponent } from './pages/country-detail/country-detail.co
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', 
     component: HomeComponent,
   },
   { 
-    path: 'country-detail/:country', 
+    path: 'country/:country', 
     component: CountryDetailComponent 
   },
   {
